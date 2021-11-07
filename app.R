@@ -11,6 +11,7 @@ library(shiny)
 library(shinyjs)
 library(tidyverse)
 library(glue)
+setwd(here::here())
 source("fcts.R")
 
 estimator_tabs <- tabsetPanel(
