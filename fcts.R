@@ -1,3 +1,7 @@
+oki_blue <- "#0072B2"
+oki_vermillion <- "#D55E00"
+oki_green <- "#009E73"
+
 create_sidebar_panel <- function(id, max_samples) {
   sidebarPanel(
     withMathJax(),
@@ -66,9 +70,6 @@ create_sidebar_layout <- function(id, max_samples) {
 
 
 create_plot <- function(sample_length, mu, sd, n_samples, estimator) {
-  oki_blue <- "#0072B2"
-  oki_vermillion <- "#D55E00"
-  oki_green <- "#009E73"
   est_name <- if_else(
     as.character(substitute(estimator)) == "mean", "mean", "variance"
   )
@@ -254,4 +255,23 @@ generate_descriptions <- function(estimator, stage, highlight = T) {
     text
   }
   
+}
+
+
+kernel_dens_estimate <- function(x, K, h, sample) {
+  n_sample <- length(sample)
+  map_dbl(sample, ~(K((x - .) / h) / (n_sample * h))) %>% 
+    sum()
+}
+
+get_kernel_function <- function(string) {
+  if (string == "Gaussian") {
+    dnorm
+  } else if (string == "Epanechnikov") {
+    function(x) 3 / 4 * (1 - x^2) * (abs(x) <= 1)
+  } else if (string == "Bisquare") {
+    function(x) 15 / 16 * (1 - x^2)^2 * (abs(x) <= 1)
+  } else if (string == "Uniform") {
+    function(x) dunif(x, min = -1, max = 1)
+  }
 }
