@@ -275,3 +275,10 @@ get_kernel_function <- function(string) {
     function(x) dunif(x, min = -1, max = 1)
   }
 }
+
+conf <- function(n, mu, sigma, alpha1, alpha2) {
+  x <- rnorm(n, mu, sigma)
+  lower <- mean(x) - sigma / sqrt(n) * qnorm(alpha2)
+  upper <- mean(x) - sigma / sqrt(n) * qnorm(alpha1)
+  c(mean = mean(x), lower = lower, upper = upper)
+}
