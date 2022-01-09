@@ -207,11 +207,11 @@ ui <- fluidPage(
               But estimating just a single value is often not enough.
               This is where so-called confidence intervals come into play. 
               These are constructed by using so-called quantiles from a known distribution.
-              To find out what that means, let us take a look at the quantiles of 
+              To find out what that means, let us take a look at the \\( \\alpha \\)-quantiles of 
               the standard normal distribution.
-              The following plot shows its density and its quantile function. 
-              Play around with the value \\(\\alpha\\) to get a feeling for the
-              interplay here.'),
+              The following plot shows its density and its entire quantile function. 
+              Play around with the slider to evaluate the quantile function at a value \\(\\alpha\\) 
+              to get a feeling for the interplay here.'),
             hr(),
             sidebarLayout(
                 sidebarPanel(
@@ -234,7 +234,11 @@ ui <- fluidPage(
             ),
             hr(),
             withMathJax('The orange area under the blue curve has an area of exactly \\(\\alpha\\). 
-Similarly, we can use the exact same approach using quantiles to find a shaded area of given size.'),
+            This means that the \\( \\alpha \\)-quantile \\( q_a \\) of a continous distribution 
+            (like the normal distribution) is defined such that \\( \\mathbb{P}(Z \\leq q_a) = \\alpha \\),
+            where \\(Z\\) is just a random variable that follows that distribution.
+            Similarly, we can use the exact same approach using quantiles to find a shaded area of any 
+            given size (simply use two quantiles). '),
             hr(),
             sidebarLayout(
                 sidebarPanel(
@@ -263,20 +267,20 @@ Similarly, we can use the exact same approach using quantiles to find a shaded a
             $$
             T = \\sqrt{n} \\frac{\\overline{X_n} - \\mu}{\\sigma}
             $$
-            is normally distributed (even if we do not know \\(\\mu\\)). 
+            is standard normally distributed (even if we do not know \\(\\mu\\)). 
             Thus, we can use the previous technique to find constants \\(c_1\\) and \\(c_2\\) such that 
-            $$\\mathbb{P}(c_1 \\leq T \\leq c_2) = 1 - \\alpha \\in (0, 1).$$ 
-            Why \\(1 - \\alpha\\)? Think of this as a simple convention. 
-            The point is that we can use the quantile function to find the 
+            $$\\mathbb{P}(c_1 \\leq T \\leq c_2) = \\gamma \\in (0, 1).$$ 
+            Where \\( \\gamma \\) is an arbitrary value in \\( (0, 1) \\).
+            The point here is that we can use the standard normal quantile function to find 
             constants such that the probability (i.e. the previous orange area) is as large as we want.
             Rewriting the equation we get 
             $$
-            \\mathbb{P}\\bigg(\\overline{X_n} - \\frac{\\sigma}{n}c_1 \\leq \\mu \\leq \\overline{X_n} - \\frac{\\sigma}{n}c_2\\bigg) = 1 - \\alpha.
+            \\mathbb{P}\\bigg(\\overline{X_n} - \\frac{\\sigma}{n}c_1 \\leq \\mu \\leq \\overline{X_n} - \\frac{\\sigma}{n}c_2\\bigg) = \\gamma.
             $$  
             This will give us a random interval and the interpretation here is that
-            \\(1 - \\alpha\\) of these randomly generated intervals will contain the 
+            \\(\\gamma\\) of these randomly generated intervals will contain the 
             "true" value \\(\\mu\\).
-            To see that, pick two new thresholds for alpha and simulate \\( N \\)  samples 
+            To see that, pick two new thresholds for \\( \\alpha \\) to pick two quantiles and simulate \\( N \\)  samples 
             of length \\( n \\) from a normal distribution with mean \\(\\mu\\)  and standard 
             deviation \\(\\sigma\\) and the resulting plot will tell you how 
             many intervals contain \\(\\mu\\).

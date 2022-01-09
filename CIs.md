@@ -66,5 +66,5 @@ In summary, we can come up with confidence intervals by a couple of steps:
 or know or can compute (e.g. $\overline{X}_n$).
 2. Make sure that you know the distribution of said statistic.
 3. Use the quantiles of the statistic's distribution to find constants such that 
-$\mathbb{P}(c_1 \leq T \leq c_2) = 1 - \alpha \in (0, 1)$.
+$\mathbb{P}(c_1 \leq T \leq c_2) = \gamma \in (0, 1)$.
 4. Rewrite the probability such that the parameter of interest is "in the middle".
